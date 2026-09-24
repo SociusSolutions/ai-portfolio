@@ -50,36 +50,19 @@ nobody can change safely.
 <div class="diagram__cap">Figure 1 — Hub and satellite architecture</div>
 <div class="diagram__body">
 <pre class="mermaid">
-graph LR
-  subgraph HUB["Socius OS — the brain"]
-    direction TB
-    KNOW["context · domains · references · playbooks<br/>what the business is, and how each system fails"]
-    SK["skills + agents<br/>executable procedure"]
-    DEC["decisions/log.md<br/>append-only"]
-    KNOW --> SK
-    SK --> DEC
-  end
+graph TB
+  KNOW["The brain<br/>context · domains · references · playbooks"]
+  SK["skills + agents<br/>executable procedure"]
+  DEC["decisions/log.md<br/>append-only"]
+  INTEG["Integration layer — MCP<br/>CRM · gym management · accounting · ads"]
+  OUT["Generated outputs<br/>JARVIS HUD · 18 dashboards · inventory · finance"]
+  SAT["Satellites — own repos, own deploys<br/>website · members · tournament · signage"]
 
-  subgraph INTEG["Integration layer — MCP"]
-    direction TB
-    CRM["CRM"]
-    GYM["Gym management"]
-    BOOKS["Accounting"]
-    ADS["Ad platforms"]
-  end
-
-  subgraph OUT["Generated outputs"]
-    direction TB
-    JAR["JARVIS dashboard<br/>read-only HUD"]
-    DASH["18 dashboards"]
-    LEDG["inventory · finance"]
-  end
-
-  SAT["Satellites<br/>website · members platform<br/>tournament tooling · signage<br/><br/>own repos, own deploys"]
-
+  KNOW --> SK
   SK --> INTEG
   INTEG --> OUT
-  HUB -. "pointers, never absorbs" .-> SAT
+  SK --> DEC
+  KNOW -. "pointers, never absorbs" .-> SAT
 </pre>
 </div>
 </div>
