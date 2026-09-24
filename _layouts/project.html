@@ -14,8 +14,8 @@ layout: default
   <div class="wrap">
     <header class="doc__head rise">
       <div class="doc__eyebrow">
-        <span class="label">Plate {{ page.order | prepend: '0' | slice: -2, 2 }}</span>
-        <span class="label">{% if page.corporate %}Corporate engagement{% else %}Socius Solutions{% endif %}</span>
+        <span class="meta">Plate {{ page.order | prepend: '0' | slice: -2, 2 }}</span>
+        <span class="meta">{% if page.corporate %}Corporate engagement{% else %}Socius Solutions{% endif %}</span>
       </div>
       <h1>{{ page.title }}</h1>
       {% if page.subtitle %}<p class="doc__sub">{{ page.subtitle }}</p>{% endif %}
