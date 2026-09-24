@@ -10,3 +10,7 @@ Thumbs.db
 
 # Local-only redaction list. Never commit.
 .redactions.local.yml
+
+# Local review scratch
+.playwright-mcp/
+shot-*.png
