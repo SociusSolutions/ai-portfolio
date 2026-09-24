@@ -50,46 +50,36 @@ nobody can change safely.
 <div class="diagram__cap">Figure 1 — Hub and satellite architecture</div>
 <div class="diagram__body">
 <pre class="mermaid">
-graph TB
+graph LR
   subgraph HUB["Socius OS — the brain"]
-    CTX["context/<br/>who, what, priorities"]
-    DOM["domains/<br/>eight operational maps"]
-    REF["references/<br/>API contracts"]
-    PLAY["playbooks/<br/>hard-won rules"]
-    DEC["decisions/log.md<br/>append-only"]
+    direction TB
+    KNOW["context · domains · references · playbooks<br/>what the business is, and how each system fails"]
     SK["skills + agents<br/>executable procedure"]
+    DEC["decisions/log.md<br/>append-only"]
+    KNOW --> SK
+    SK --> DEC
   end
 
-  subgraph INTEG["Integration layer"]
-    GHL["GoHighLevel<br/>3 sub-accounts"]
-    WOD["Gym management<br/>memberships, check-ins"]
-    QBO["QuickBooks Online<br/>self-hosted MCP"]
-    META["Meta Graph<br/>ad spend"]
-    GW["Google Workspace"]
+  subgraph INTEG["Integration layer — MCP"]
+    direction TB
+    CRM["CRM"]
+    GYM["Gym management"]
+    BOOKS["Accounting"]
+    ADS["Ad platforms"]
   end
 
-  subgraph OUT["Outputs"]
+  subgraph OUT["Generated outputs"]
+    direction TB
     JAR["JARVIS dashboard<br/>read-only HUD"]
-    DASH["18 generated<br/>dashboards"]
-    RET["retail/<br/>inventory ledger"]
-    FIN["finance/<br/>close + tax"]
+    DASH["18 dashboards"]
+    LEDG["inventory · finance"]
   end
 
-  subgraph SAT["Satellites — own repos, own deploys"]
-    WEB["Website"]
-    KIDS["Members platform"]
-    TOUR["Tournament tooling"]
-    TV["Signage"]
-  end
+  SAT["Satellites<br/>website · members platform<br/>tournament tooling · signage<br/><br/>own repos, own deploys"]
 
   SK --> INTEG
   INTEG --> OUT
-  CTX --> SK
-  DOM --> SK
-  REF --> SK
-  PLAY --> SK
-  SK --> DEC
-  DOM -. "pointers, never absorbs" .-> SAT
+  HUB -. "pointers, never absorbs" .-> SAT
 </pre>
 </div>
 </div>
