@@ -1,0 +1,158 @@
+- generic [active] [ref=f6e1]:
+  - link "Skip to content" [ref=f6e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f6e3]:
+    - generic [ref=f6e4]:
+      - link "Randal Boiteau." [ref=f6e5] [cursor=pointer]:
+        - /url: /ai-portfolio/
+      - navigation "Primary" [ref=f6e6]:
+        - link "Work" [ref=f6e7] [cursor=pointer]:
+          - /url: /ai-portfolio/
+        - link "Socius OS" [ref=f6e8] [cursor=pointer]:
+          - /url: /ai-portfolio/socius-os/
+        - link "Capabilities" [ref=f6e9] [cursor=pointer]:
+          - /url: /ai-portfolio/capabilities/
+        - link "About" [ref=f6e10] [cursor=pointer]:
+          - /url: /ai-portfolio/about/
+        - button "Toggle colour scheme" [ref=f6e11] [cursor=pointer]: Theme
+  - main [ref=f6e12]:
+    - article [ref=f6e13]:
+      - generic [ref=f6e14]:
+        - generic [ref=f6e15]:
+          - generic [ref=f6e16]:
+            - generic [ref=f6e17]: Plate 09
+            - generic [ref=f6e18]: Socius Solutions
+          - heading "Socius TV" [level=1] [ref=f6e19]
+          - paragraph [ref=f6e20]: Digital signage with no server and no build step, where the screens are a git commit away — and an agent can change what is on the wall by being asked.
+        - region "Project summary" [ref=f6e21]:
+          - generic [ref=f6e22]:
+            - generic [ref=f6e23]:
+              - term [ref=f6e24]: Role
+              - definition [ref=f6e25]: Designer and sole engineer
+            - generic [ref=f6e26]:
+              - term [ref=f6e27]: Period
+              - definition [ref=f6e28]: "2026"
+            - generic [ref=f6e29]:
+              - term [ref=f6e30]: Status
+              - definition [ref=f6e31]:
+                - generic [ref=f6e32]: Live on the wall
+          - generic [ref=f6e33]:
+            - generic [ref=f6e34]:
+              - term [ref=f6e35]: Stack
+              - definition [ref=f6e36]: Plain HTML, CSS, JavaScript, Vercel, MCP server
+            - generic [ref=f6e37]:
+              - term [ref=f6e38]: AI techniques
+              - definition [ref=f6e39]: Authored MCP server, draft-validate-publish tool design, agent-operated public display
+          - generic [ref=f6e40]:
+            - generic [ref=f6e41]:
+              - term [ref=f6e42]: Domain
+              - definition [ref=f6e43]: Operations & communication
+            - generic [ref=f6e44]:
+              - term [ref=f6e45]: Links
+              - definition [ref=f6e46]:
+                - link "Live site" [ref=f6e47] [cursor=pointer]:
+                  - /url: https://sociustv.vercel.app
+                - text: · Private repository
+        - generic [ref=f6e48]:
+          - heading "Problem" [level=2] [ref=f6e49]
+          - paragraph [ref=f6e50]: The gym has televisions on the wall. They should show the class schedule, what is coming up, a countdown to the next event, and whatever needs announcing this week.
+          - paragraph [ref=f6e51]: Commercial digital signage sells this as a subscription per screen, with a hosted editor, an account, and a player application to install and keep updated. For two screens in a gym that is a recurring cost and an ongoing dependency in exchange for a great deal of functionality nobody here needs.
+          - paragraph [ref=f6e52]: "The actual requirement is small and specific: someone should be able to change what is on the screens in under a minute, from a phone, without logging into anything; the screens should pick the change up on their own; and the whole thing should still work in two years without anyone maintaining it. The last point rules out most of the obvious approaches — a signage system that needs a dependency upgrade to keep displaying a schedule has failed at its one job."
+          - heading "What I built" [level=2] [ref=f6e53]
+          - paragraph [ref=f6e54]: Two pages and a file.
+          - paragraph [ref=f6e55]:
+            - text: An
+            - strong [ref=f6e56]: editor
+            - text: builds a display. A
+            - strong [ref=f6e57]: player
+            - text: renders one full-screen and is what the television points at. And a single
+            - strong [ref=f6e58]: published snapshot file, committed to the repository, is the only source of truth for what is on the screens.
+            - text: Committing a change to that file redeploys the site, and every screen picks it up on its next poll.
+          - generic [ref=f6e59]:
+            - generic [ref=f6e60]: Figure 1 — The published file is the state
+            - document [ref=f6e63]:
+              - generic [ref=f6e65]:
+                - generic [ref=f6e75]:
+                  - paragraph [ref=f6e81]: fails
+                  - paragraph [ref=f6e87]: passes
+                  - paragraph [ref=f6e93]: polls
+                  - paragraph [ref=f6e99]: polls
+                - generic [ref=f6e100]:
+                  - paragraph [ref=f6e107]: Editorbuild a display
+                  - paragraph [ref=f6e114]: published snapshotcommitted to the repo
+                  - paragraph [ref=f6e121]: MCP serveragent tools
+                  - paragraph [ref=f6e128]: Draft
+                  - paragraph [ref=f6e135]: validate
+                  - paragraph [ref=f6e142]: publish
+                  - paragraph [ref=f6e149]: Static deploy
+                  - paragraph [ref=f6e156]: Screen — player
+                  - paragraph [ref=f6e163]: Screen — player
+          - paragraph [ref=f6e164]: No build step. No server. No framework. No database. The state of the physical screens in a physical room is a versioned file, which means it has a history, a diff, an author per change, and a one-command rollback. Signage systems costing hundreds of dollars a year do not give you that.
+          - paragraph [ref=f6e165]:
+            - text: It is also deliberately its
+            - strong [ref=f6e166]: own repository and its own deployment
+            - text: ", separate from the business dashboard that links to it. Nothing imports across the boundary. Working on signage cannot break the dashboard and working on the dashboard cannot take down the screens on the wall. When two systems have genuinely different failure consequences, coupling them to share a little code is a bad trade."
+          - heading "How it works" [level=2] [ref=f6e167]
+          - paragraph [ref=f6e168]:
+            - text: The more interesting half is that the signage is
+            - strong [ref=f6e169]: agent-operable
+            - text: ", because I wrote an MCP server for it."
+          - paragraph [ref=f6e170]: Model Context Protocol is how a language model is given typed tools instead of being told to go and edit files. The server exposes the operations signage actually needs — set the ticker, set a countdown, post or remove an announcement, set the weekly schedule, replace schedule rows, add an image slide, prune expired items, inspect the current state, validate, and publish.
+          - paragraph [ref=f6e171]:
+            - text: The design decision that matters is that
+            - strong [ref=f6e172]:
+              - text: every content tool writes to a draft, and only
+              - code [ref=f6e173]: publish
+              - text: pushes the draft to the screens.
+            - text: There is a separate
+            - code [ref=f6e174]: validate
+            - text: that checks the draft first.
+          - generic [ref=f6e175]: Figure 2 — Why the draft boundary exists
+          - paragraph [ref=f6e181]: This is the part I would point to as tool design rather than plumbing. An agent editing a public display is a small but real trust problem — the output is visible to every member and visitor in the building, and a partial edit is worse than no edit. A tool surface where every write is reversible and invisible until one explicit irreversible call makes the whole capability safe to expose. The agent can work freely; the wall only changes on purpose.
+          - paragraph [ref=f6e182]: The practical result is that changing the screens is a sentence. “No kids class Monday, put up the tournament countdown” updates the schedule, posts the announcement, sets the countdown, and reports what will change before anything changes. Expired announcements are pruned rather than accumulating, which is the failure mode of every noticeboard ever built.
+          - heading "AI techniques used" [level=2] [ref=f6e183]
+          - list [ref=f6e184]:
+            - listitem [ref=f6e185]:
+              - strong [ref=f6e186]: An MCP server, authored for this system.
+              - text: Not a generic file-editing agent pointed at a repository — a purpose-built tool surface expressing the operations the domain actually has.
+            - listitem [ref=f6e187]:
+              - strong [ref=f6e188]: Draft-validate-publish tool semantics.
+              - text: Every write is to a draft; a validator checks it; one explicit call commits. The safety property is in the shape of the tool surface, not in instructions asking the model to be careful.
+            - listitem [ref=f6e189]:
+              - strong [ref=f6e190]: Validation as a first-class tool
+              - text: the agent can call on itself before showing a human anything.
+            - listitem [ref=f6e191]:
+              - strong [ref=f6e192]: Narrow, domain-shaped tools.
+              - text: “Set the countdown” and “prune expired” rather than “write this JSON”. Narrow tools are harder to misuse and their failures are legible.
+            - listitem [ref=f6e193]:
+              - strong [ref=f6e194]: Reversibility by design.
+              - text: Published state is a committed file, so every change has an author, a diff and a rollback.
+          - heading "Outcome" [level=2] [ref=f6e195]
+          - list [ref=f6e196]:
+            - listitem [ref=f6e197]: Two screens running on a static deployment with no subscription and no player software to maintain.
+            - listitem [ref=f6e198]: The state of the screens is version-controlled, with history and one-command rollback.
+            - listitem [ref=f6e199]: Updating the wall is a spoken sentence rather than a login, and the person doing it does not need to know how any of it works.
+            - listitem [ref=f6e200]: No build step and no dependencies means nothing to keep alive. It will still work in two years.
+            - listitem [ref=f6e201]: Isolated from the business dashboard, so neither can take the other down.
+          - heading "What I’d do differently" [level=2] [ref=f6e202]
+          - paragraph [ref=f6e203]: "The player trusts that the published file is well-formed, because validation happens before publishing rather than at render. That is the right place for it in the normal path, but it means a malformed file reaching the screens has no graceful degradation — the display just breaks, in public, in front of everyone. I would add a last-known-good fallback in the player: if the current snapshot fails to parse, keep rendering the previous one and surface the problem quietly rather than showing a blank television."
+          - paragraph [ref=f6e204]: I would also give the editor and the MCP server a shared schema definition. Right now both understand the snapshot format and they agree because I wrote them together. That agreement is a convention, not an enforced contract, and the first divergence will be found on the wall.
+        - navigation "More work" [ref=f6e205]:
+          - generic [ref=f6e206]:
+            - generic [ref=f6e207]: Previous
+            - link "←" [ref=f6e208] [cursor=pointer]:
+              - /url: ""
+          - generic [ref=f6e209]:
+            - generic [ref=f6e210]: Next
+            - link "Provincial Association Site & Regulatory Archive →" [ref=f6e211] [cursor=pointer]:
+              - /url: /ai-portfolio/projects/manitoba-jiujitsu/
+  - contentinfo [ref=f6e212]:
+    - generic [ref=f6e213]:
+      - generic [ref=f6e214]: Randal Boiteau — AI systems, automation, and applied engineering
+      - generic [ref=f6e215]:
+        - link "GitHub" [ref=f6e216] [cursor=pointer]:
+          - /url: https://github.com/SociusSolutions
+        - text: /
+        - link "Contact" [ref=f6e217] [cursor=pointer]:
+          - /url: /ai-portfolio/about/
+      - generic [ref=f6e218]: Built with Jekyll. Diagrams by Mermaid.

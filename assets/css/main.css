@@ -236,8 +236,10 @@ a:hover{color:var(--accent);text-decoration:underline}
 .diagram__body{padding:1.4rem 1rem;overflow-x:auto}
 .mermaid{display:flex;justify-content:center;min-width:0}
 /* No max-width: a wide diagram keeps a legible size and its container scrolls.
-   Shrinking to fit a phone makes flowchart labels unreadable. */
-.mermaid svg{height:auto}
+   Shrinking to fit a phone makes flowchart labels unreadable.
+   flex:none is required -- as a flex child the SVG would otherwise be squeezed
+   back down to the container width, undoing useMaxWidth:false. */
+.mermaid svg{height:auto;flex:0 0 auto}
 /* Mermaid's internal class names overlap common utility names. Neutralise the
    page's type scale inside a diagram so a future rule cannot leak in again. */
 .diagram .label,.diagram .nodeLabel,.diagram .edgeLabel,.diagram text,.diagram span{
@@ -293,4 +295,13 @@ a:hover{color:var(--accent);text-decoration:underline}
   .themetoggle{margin-left:auto}
   .diagram__body{padding:1rem .75rem}
   .prose pre{font-size:.74rem}
+}
+
+/* A diagram is not prose: let it use the page width rather than the reading
+   measure, so fewer of them need horizontal scrolling. */
+@media(min-width:900px){
+  .prose>.diagram{
+    width:calc(min(100vw, var(--wrap)) - 2 * clamp(1.15rem,4vw,2.5rem));
+    max-width:none;
+  }
 }
