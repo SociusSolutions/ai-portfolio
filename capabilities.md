@@ -1,4 +1,5 @@
 ---
+permalink: /capabilities/
 title: "How I build with AI"
 subtitle: "The working method behind the systems on this site: procedures as version-controlled documents, typed tool surfaces instead of improvisation, specifications before code, and measurement before trust."
 eyebrow: "Method"

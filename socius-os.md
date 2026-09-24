@@ -1,4 +1,5 @@
 ---
+permalink: /socius-os/
 title: "Socius OS, by business domain"
 subtitle: "The same operating system, broken out the way the business actually is. What is automated in each area, what it replaced, and the specific engineering problem each one turned out to be."
 eyebrow: "Domain breakout"

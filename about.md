@@ -1,4 +1,5 @@
 ---
+permalink: /about/
 title: "About"
 subtitle: "I build systems that run operations without me, and I run a business that proves whether they work."
 eyebrow: "Contact"
