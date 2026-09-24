@@ -1,0 +1,49 @@
+---
+layout: default
+---
+{% assign ordered = site.projects | sort: "order" %}
+{% assign idx = 0 %}
+{% for p in ordered %}{% if p.url == page.url %}{% assign idx = forloop.index0 %}{% endif %}{% endfor %}
+{% assign prev = null %}
+{% assign next = null %}
+{% if idx > 0 %}{% assign prev = ordered[idx | minus: 1] %}{% endif %}
+{% assign nextidx = idx | plus: 1 %}
+{% if nextidx < ordered.size %}{% assign next = ordered[nextidx] %}{% endif %}
+
+<article class="doc">
+  <div class="wrap">
+    <header class="doc__head rise">
+      <div class="doc__eyebrow">
+        <span class="label">Plate {{ page.order | prepend: '0' | slice: -2, 2 }}</span>
+        <span class="label">{% if page.corporate %}Corporate engagement{% else %}Socius Solutions{% endif %}</span>
+      </div>
+      <h1>{{ page.title }}</h1>
+      {% if page.subtitle %}<p class="doc__sub">{{ page.subtitle }}</p>{% endif %}
+    </header>
+
+    {% include titleblock.html %}
+
+    {% if page.corporate %}
+    <div class="note note--redacted">
+      <span class="note__label">Redacted</span>
+      <p>This was built under a corporate engagement. The client, its tenants, its
+      data and the measured results are withheld. What follows describes the
+      capability and the problem class only. Implementation detail and results are
+      available on request, subject to the engagement terms.</p>
+    </div>
+    {% endif %}
+
+    <div class="prose">
+      {{ content }}
+    </div>
+
+    <nav class="pager" aria-label="More work">
+      <div>
+        {% if prev %}<span>Previous</span><a href="{{ prev.url | relative_url }}">&larr; {{ prev.title }}</a>{% endif %}
+      </div>
+      <div style="text-align:right">
+        {% if next %}<span>Next</span><a href="{{ next.url | relative_url }}">{{ next.title }} &rarr;</a>{% endif %}
+      </div>
+    </nav>
+  </div>
+</article>

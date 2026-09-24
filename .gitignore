@@ -1,0 +1,12 @@
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+vendor/
+.bundle/
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Local-only redaction list. Never commit.
+.redactions.local.yml

@@ -1,0 +1,29 @@
+# Shape-based patterns that must never appear in the built site.
+# Enforced by scripts/check-redactions.sh before deployment.
+#
+# mode: i  = case-insensitive substring
+# mode: w  = case-sensitive whole word
+# mode: re = extended regex
+#
+# The client-specific identifier list is deliberately NOT in this file. Naming the
+# strings here would publish them, which is the thing being prevented. That list
+# lives in an uncommitted local file and, in CI, in a repository secret. See
+# scripts/check-redactions.sh and the REDACTIONS_EXTRA environment variable.
+
+secret_shapes:
+  - { pattern: "gho_[A-Za-z0-9]{16,}",  mode: re, why: "GitHub OAuth token" }
+  - { pattern: "ghp_[A-Za-z0-9]{16,}",  mode: re, why: "GitHub PAT" }
+  - { pattern: "github_pat_[A-Za-z0-9_]{20,}", mode: re, why: "GitHub fine-grained PAT" }
+  - { pattern: "sk-[A-Za-z0-9]{20,}",   mode: re, why: "API secret key" }
+  - { pattern: "xoxb-[A-Za-z0-9-]{10,}", mode: re, why: "Slack bot token" }
+  - { pattern: "AKIA[0-9A-Z]{16}",      mode: re, why: "AWS access key id" }
+  - { pattern: "eyJ[A-Za-z0-9_-]{30,}", mode: re, why: "JWT" }
+  - { pattern: "-----BEGIN [A-Z ]*PRIVATE KEY", mode: re, why: "private key block" }
+  - { pattern: "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}", mode: re, why: "GUID: likely a tenant or object id" }
+
+pii_shapes:
+  - { pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}", mode: re, why: "North American phone number" }
+
+# Note: no pattern for third-party email addresses. The site deliberately carries the
+# author's own contact address, and a shape pattern cannot tell that apart from someone
+# else's. Third-party addresses are a review concern, not a grep concern.

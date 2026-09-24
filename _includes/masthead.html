@@ -1,0 +1,12 @@
+<header class="masthead">
+  <div class="wrap masthead__in">
+    <a class="brand" href="{{ '/' | relative_url }}">Randal Boiteau<span>.</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Work</a>
+      <a href="{{ '/socius-os/' | relative_url }}"{% if page.url contains '/socius-os' %} aria-current="page"{% endif %}>Socius OS</a>
+      <a href="{{ '/capabilities/' | relative_url }}"{% if page.url contains '/capabilities' %} aria-current="page"{% endif %}>Capabilities</a>
+      <a href="{{ '/about/' | relative_url }}"{% if page.url contains '/about' %} aria-current="page"{% endif %}>About</a>
+      <button class="themetoggle" id="themetoggle" type="button" aria-label="Toggle colour scheme">Theme</button>
+    </nav>
+  </div>
+</header>

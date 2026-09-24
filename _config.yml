@@ -1,0 +1,41 @@
+title: "Randal Boiteau"
+tagline: "AI systems, automation, and applied engineering"
+description: >-
+  A portfolio of AI applications, agents, automation systems and platforms —
+  built and operated in production.
+author: "Randal Boiteau"
+url: "https://sociussolutions.github.io"
+baseurl: "/ai-portfolio"
+github_username: SociusSolutions
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope: { path: "", type: "projects" }
+    values: { layout: "project" }
+  - scope: { path: "" }
+    values: { layout: "page" }
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+sass:
+  style: compressed
+
+exclude:
+  - scripts/
+  - docs/
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .github/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge

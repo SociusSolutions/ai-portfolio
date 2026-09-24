@@ -1,0 +1,41 @@
+<section class="titleblock rise" aria-label="Project summary">
+  <div class="titleblock__row titleblock__row--3">
+    <dl class="tb">
+      <dt>Role</dt>
+      <dd>{{ page.role }}</dd>
+    </dl>
+    <dl class="tb">
+      <dt>Period</dt>
+      <dd>{{ page.period }}</dd>
+    </dl>
+    <dl class="tb">
+      <dt>Status</dt>
+      <dd><span class="status status--{{ page.status_kind | default: 'live' }}">{{ page.status }}</span></dd>
+    </dl>
+  </div>
+  <div class="titleblock__row titleblock__row--2">
+    <dl class="tb">
+      <dt>Stack</dt>
+      <dd>{{ page.stack }}</dd>
+    </dl>
+    <dl class="tb">
+      <dt>AI techniques</dt>
+      <dd>{{ page.techniques }}</dd>
+    </dl>
+  </div>
+  <div class="titleblock__row titleblock__row--2">
+    <dl class="tb">
+      <dt>Domain</dt>
+      <dd>{{ page.domain }}</dd>
+    </dl>
+    <dl class="tb">
+      <dt>Links</dt>
+      <dd>
+        {% if page.live %}<a href="{{ page.live }}">Live site</a>{% endif %}
+        {% if page.live and page.repo_note %} &middot; {% endif %}
+        {% if page.repo_note %}{{ page.repo_note }}{% endif %}
+        {% unless page.live or page.repo_note %}Private repository{% endunless %}
+      </dd>
+    </dl>
+  </div>
+</section>

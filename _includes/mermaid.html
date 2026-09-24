@@ -1,0 +1,39 @@
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  const root = document.documentElement;
+  const stored = (() => { try { return localStorage.getItem('rb-theme'); } catch (e) { return null; } })();
+  const dark = stored
+    ? stored === 'dark'
+    : window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  const palette = dark
+    ? { bg:'#171a20', line:'#89b0e0', text:'#e8e4d9', node:'#1d222b', accent:'#f0782f' }
+    : { bg:'#f6f4ee', line:'#1b3a6b', text:'#16181c', node:'#e6e2d6', accent:'#b23a10' };
+
+  mermaid.initialize({
+    startOnLoad: true,
+    securityLevel: 'strict',
+    theme: 'base',
+    fontFamily: "'IBM Plex Mono', ui-monospace, Menlo, monospace",
+    themeVariables: {
+      background: palette.bg,
+      primaryColor: palette.node,
+      primaryTextColor: palette.text,
+      primaryBorderColor: palette.line,
+      secondaryColor: palette.bg,
+      tertiaryColor: palette.bg,
+      lineColor: palette.line,
+      textColor: palette.text,
+      mainBkg: palette.node,
+      nodeBorder: palette.line,
+      clusterBkg: 'transparent',
+      clusterBorder: palette.accent,
+      titleColor: palette.text,
+      edgeLabelBackground: palette.bg,
+      fontSize: '13px'
+    },
+    flowchart: { curve: 'basis', padding: 14, nodeSpacing: 40, rankSpacing: 46, useMaxWidth: true },
+    sequence: { useMaxWidth: true, actorMargin: 42 }
+  });
+</script>

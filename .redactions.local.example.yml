@@ -1,0 +1,16 @@
+# Copy to .redactions.local.yml and fill in. That file is gitignored.
+# Mirror the same content into the REDACTIONS_EXTRA repository secret for CI.
+#
+# mode: i  = case-insensitive substring
+# mode: w  = case-sensitive whole word (use for short tokens that would false-positive)
+# mode: re = extended regex
+
+client_identifiers:
+  - { pattern: "AcmeCorp",      mode: i, why: "client legal entity" }
+  - { pattern: "ACME",          mode: w, why: "client internal team name" }
+  - { pattern: "project-alpha", mode: i, why: "client project codename" }
+
+account_identifiers:
+  - { pattern: "aBcDeFgHiJkLmNoPqRsT", mode: i, why: "CRM location identifier" }
+  - { pattern: "555-555-5555",         mode: i, why: "business phone line" }
+  - { pattern: "1 Example Street",     mode: i, why: "street address" }

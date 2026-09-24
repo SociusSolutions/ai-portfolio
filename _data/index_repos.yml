@@ -1,0 +1,47 @@
+# Smaller and earlier work. Listed for completeness; no deep-dive page.
+- name: "Socius Kiosk"
+  what: "Wall-mounted iPad self check-in for the academy front door, backed by a proxy to the gym-management API."
+  stack: "Python, Docker, vanilla JS"
+  state: "In progress"
+
+- name: "Emotion 26"
+  what: "Phone-first three-day festival schedule across five stages plus a workshop track. Star sets, get a reminder before each one. No accounts, no server."
+  stack: "HTML, CSS, JS"
+  state: "Shipped"
+  live: "https://sociussolutions.github.io/emotion26/"
+
+- name: "Tournament Estimator"
+  what: "First pass at predicting a tournament's finish time from its registration list. The idea that later became the Smoothcomp support app."
+  stack: "React"
+  state: "Superseded"
+
+- name: "Registration Analyser"
+  what: "Exploratory tool for reading competition registration exports and finding the shape of the field."
+  stack: "React, Vite, Tailwind"
+  state: "Superseded"
+
+- name: "Legacy Stats Tracker"
+  what: "Match and competitor statistics tracking for a tournament series."
+  stack: "React, TypeScript, Postgres"
+  state: "Archived"
+
+- name: "Grappling Industries Merges"
+  what: "Division-merge planning for a specific competition circuit's bracket format."
+  stack: "TypeScript"
+  state: "Archived"
+
+- name: "sociusbjj.com"
+  what: "Hand-written static site, one stylesheet, no bundler. Blog posts self-publish from front-matter dates on a weekly cron; a documented design system governs every visual change."
+  stack: "HTML, CSS, JS, GitHub Actions"
+  state: "Live"
+  live: "https://sociusbjj.com"
+
+- name: "Socius CLA spec packs"
+  what: "Two generations of specification packs for the constraints-led kids curriculum engine: output schemas, generator prompts, and migrations. The design record behind the members platform."
+  stack: "Markdown specs, SQL"
+  state: "Folded into platform"
+
+- name: "Family Funds"
+  what: "Shared household budgeting experiment."
+  stack: "Early prototype"
+  state: "Archived"

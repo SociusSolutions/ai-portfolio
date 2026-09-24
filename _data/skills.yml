@@ -1,0 +1,39 @@
+- group: "AI & agents"
+  items:
+    - "Claude API / Agent SDK"
+    - "Claude Code skills & subagents"
+    - "MCP servers — authored & self-hosted"
+    - "RAG & hybrid retrieval"
+    - "Embeddings & pgvector"
+    - "Prompt specs + eval harnesses"
+    - "Agent-maintained knowledge bases"
+
+- group: "Languages"
+  items:
+    - "TypeScript"
+    - "Python"
+    - "PowerShell"
+    - "SQL / PLpgSQL / TSQL"
+    - "Bicep"
+    - "JavaScript"
+    - "Bash"
+
+- group: "Platforms & data"
+  items:
+    - "Azure (Functions, AI Search, Doc Intelligence)"
+    - "Supabase / Postgres + RLS"
+    - "Neon + PostGIS"
+    - "Vercel"
+    - "Microsoft Graph / Entra ID"
+    - "GitHub Actions"
+    - "Next.js / React"
+
+- group: "Systems & integration"
+  items:
+    - "GoHighLevel API + workflow specs"
+    - "QuickBooks Online"
+    - "Wodify"
+    - "Mapbox, Resend, Turnstile"
+    - "Meta Graph API"
+    - "Infrastructure as code"
+    - "Drift detection & reconciliation"

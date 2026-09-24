@@ -1,0 +1,85 @@
+name: Build, verify, deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Build site
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build --trace
+
+      # These gates run BEFORE the artifact is uploaded. A redaction leak or a
+      # broken internal link fails the job, and nothing is deployed.
+      - name: Gate — page structure
+        run: bash scripts/check-structure.sh
+
+      # The identifier list is not in the repository. It arrives as a secret so the
+      # gate is complete in CI without publishing the strings it protects.
+      - name: Materialise redaction identifier list
+        env:
+          LIST: ${{ secrets.REDACTIONS_EXTRA }}
+        run: |
+          if [ -z "$LIST" ]; then
+            echo "::error::secret REDACTIONS_EXTRA is not set. The redaction gate would be partial."
+            exit 1
+          fi
+          echo "$LIST" > "$RUNNER_TEMP/redactions.extra.yml"
+          echo "REDACTIONS_EXTRA=$RUNNER_TEMP/redactions.extra.yml" >> "$GITHUB_ENV"
+
+      - name: Gate — redactions
+        run: bash scripts/check-redactions.sh _site
+
+      - name: Remove identifier list
+        if: always()
+        run: rm -f "$RUNNER_TEMP/redactions.extra.yml"
+
+      - name: Gate — internal links
+        run: bash scripts/check-links.sh _site /ai-portfolio
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site
+          retention-days: 7
+
+      - uses: actions/configure-pages@v5
+        if: github.ref == 'refs/heads/main'
+
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

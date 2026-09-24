@@ -25,11 +25,20 @@ systems as evidence.
   their code or data.
 - Consistent structure and voice across every page. Concrete over vague.
 
-## Redaction list (build-gated)
+## Redaction gate
 
-`HarrisComputer`, `Harris Computer`, `CIT`, `MTO`, `#hub`, `hub-poc`, `trcp`,
-tenant GUIDs, member names, internal hostnames. Enforced by
-`scripts/check-redactions.sh` against the built site — non-zero exit blocks publish.
+Client legal entity names, internal team and programme names, project codenames,
+CRM account and form identifiers, the business phone line and street address,
+tenant GUIDs, member names and internal hostnames must never reach the built site.
+
+Enforced by `scripts/check-redactions.sh`; a non-zero exit blocks deployment.
+
+**The identifier list is deliberately not committed.** Writing the forbidden strings
+into a public repository would publish the very thing the gate exists to prevent.
+Shape-based patterns (token formats, GUIDs, phone numbers) live in
+`_data/redactions.yml`; the client-specific list lives in an uncommitted
+`.redactions.local.yml` locally and in a repository secret in CI, merged via the
+`REDACTIONS_EXTRA` environment variable.
 
 ## Hosting
 
@@ -51,36 +60,38 @@ tenant GUIDs, member names, internal hostnames. Enforced by
 
 ### Flagship deep dives (10)
 
-| Slug | Source | Kind |
-|---|---|---|
-| `socius-os` | SociusSolutions/SociusOS | AI operating system |
-| `lead-flow-atlas` | SociusSolutions/SociusLeads | automation-as-spec |
-| `tenant-compliance-platform` | rtbsec/trcp | corporate, capability-only |
-| `document-intelligence-pipeline` | rtbsec/hcms | corporate, capability-only |
-| `rummage-map` | SociusSolutions/the-garage | consumer web app |
-| `smoothcomp-support` | SociusSolutions/SCSmoothSupport | support tooling |
-| `socius-tv` | SociusSolutions/sociustv | digital signage |
-| `members-portal` | SociusSolutions/SociusKids | members + onboarding |
-| `socius-vault` | SociusSolutions/SociusVault | agent-maintained knowledge base |
-| `manitoba-jiujitsu` | SociusSolutions/mbweb | static site + PDF generation |
+| Slug | Kind |
+|---|---|
+| `socius-os` | AI operating system |
+| `lead-flow-atlas` | automation-as-spec |
+| `tenant-compliance-platform` | corporate, capability-only |
+| `document-intelligence-pipeline` | corporate, capability-only |
+| `rummage-map` | consumer web app |
+| `smoothcomp-support` | tournament operations |
+| `socius-tv` | digital signage + MCP server |
+| `members-portal` | members platform + curriculum engine |
+| `socius-vault` | agent-maintained knowledge base |
+| `manitoba-jiujitsu` | static site + compliance tooling |
+
+Source repositories are private and are not named here.
 
 ### Socius OS domains
 
 finance & accounting · members & onboarding · leads & funnel · comms ·
 curriculum · ops & reporting
 
-### Index-only repos
+### Index-only entries
 
-`sociuskiosk`, `emotion26`, `Tournament-Estimator-app`, `registration-analyser`,
-`LegacyStatsTracker`, `GrapplingIndustries-Merges`, `sociuswebsite`,
-`FamilyFunds`, `kalie`, `socius-kids`, `LegacyBasic`, `SociusWebsite-Bolt`,
-`nextjs-with-supabase*`
+Smaller tools, earlier attempts and superseded work appear as rows in the index
+table on the landing page, driven by `_data/index_repos.yml`. Scaffold and
+template repositories are excluded entirely.
 
 ### Excluded
 
-- `web-check` — upstream is Lissy93/web-check, not authored work.
-- `rtbsec/CIPP`, `CIPP-API`, `AzureHound`, `EntraFalcon` — forks of public tools.
-  Mentioned only as tools worked with, never as authored work.
+- One repository whose upstream is a third party's open-source project, not
+  authored work.
+- Four forks of public security tools. Mentioned only as tools worked with, never
+  as authored work.
 
 ## Page template
 
@@ -117,3 +128,4 @@ carry a wireframe-style layout diagram.
 - No live data, credentials, or screenshots containing member names
 - Not a résumé replacement
 - No per-repo pages for scaffold repos — index rows only
+- The portfolio describes the source repositories; it never vendors their code or data
